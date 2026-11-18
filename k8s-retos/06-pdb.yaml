@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: campus-api
+  namespace: campustareas
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: campus-api

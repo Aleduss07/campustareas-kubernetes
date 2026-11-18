@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campus-web
+  namespace: campustareas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: campus-web
+  template:
+    metadata:
+      labels:
+        app: campus-web
+    spec:
+      containers:
+        - name: web
+          image: campus-web:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 24Mi
+            limits:
+              memory: 96Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: campus-web
+  namespace: campustareas
+spec:
+  type: NodePort
+  selector:
+    app: campus-web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30081

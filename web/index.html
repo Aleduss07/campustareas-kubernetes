@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tu agenda de entregas académicas en CampusTareas.">
+  <title>CampusTareas | Mis entregas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">Campus<span>Tareas</span></a><span>Mi espacio de estudio</span></header>
+  <main>
+    <section class="intro"><div><h1>Una entrega a la vez.</h1><p>Organiza tus pendientes y deja espacio para aprender.</p></div><p id="today"></p></section>
+    <div class="workspace">
+      <aside><form id="create-form">
+        <h2>Nueva tarea</h2>
+        <label for="title">¿Qué tienes que entregar?</label><input id="title" name="titulo" required maxlength="200" placeholder="Ej. Informe de Docker">
+        <label for="description">Descripción <span>(opcional)</span></label><textarea id="description" name="descripcion" rows="4" maxlength="4000" placeholder="Anota los detalles de la entrega"></textarea>
+        <label for="due">Fecha de entrega <span>(opcional)</span></label><input id="due" name="fechaEntrega" type="date">
+        <button class="primary" id="save" type="submit">Crear tarea</button>
+        <p id="form-message" role="status" aria-live="polite"></p>
+      </form><p class="aside-note">Tus tareas se guardan al crearlas. Puedes volver a ellas desde cualquier navegador conectado a este servidor.</p></aside>
+      <section class="agenda" aria-labelledby="agenda-title">
+        <div class="agenda-heading"><h2 id="agenda-title">Mis entregas</h2><button id="refresh" type="button">Actualizar</button></div>
+        <div class="tools"><div class="filters" role="group" aria-label="Filtrar tareas"><button data-filter="pending" aria-pressed="true">Pendientes</button><button data-filter="done" aria-pressed="false">Completadas</button><button data-filter="all" aria-pressed="false">Todas</button></div><label class="search-label">Buscar<input id="search" type="search" placeholder="Buscar tarea"></label></div>
+        <p id="summary" class="summary" aria-live="polite"></p><p id="list-message" role="status" aria-live="polite">Cargando tus tareas…</p>
+        <ul id="tasks" class="tasks"></ul>
+      </section>
+    </div>
+  </main>
+  <footer>CampusTareas <span>Tu próxima entrega empieza aquí.</span></footer>
+</body></html>

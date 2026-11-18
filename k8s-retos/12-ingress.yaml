@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: campus
+spec:
+  controller: traefik.io/ingress-controller
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: campus
+  namespace: campustareas
+spec:
+  ingressClassName: campus
+  rules:
+    - host: campustareas.localhost
+      http:
+        paths:
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: campus-api
+                port:
+                  number: 80
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: campus-api
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: campus-web
+                port:
+                  number: 80
